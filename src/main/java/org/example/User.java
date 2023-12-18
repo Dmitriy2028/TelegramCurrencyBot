@@ -1,21 +1,26 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class User {
     private Long chatId;
     private int charsAfterComa;
     private String bank;
-    private int timeOfNotifications;
+    private String timeOfNotifications;
     private List<String> currency = new ArrayList<String>();
+    private boolean currencyIsDefault;
+
+    private LinkedHashMap<String,String> bankButtons = new LinkedHashMap<>();
 
     public User(Long chatId) {
         this.chatId = chatId;
         this.charsAfterComa = 2;
         this.bank = "Privat";
-        this.timeOfNotifications = 0;
+        this.timeOfNotifications = "off";
         this.currency.add("USD");
+        this.currencyIsDefault = true;
     }
 
     public Long getChatId() {
@@ -38,11 +43,11 @@ public class User {
         this.bank = bank;
     }
 
-    public int getTimeOfNotifications() {
+    public String getTimeOfNotifications() {
         return timeOfNotifications;
     }
 
-    public void setTimeOfNotifications(int timeOfNotifications) {
+    public void setTimeOfNotifications(String timeOfNotifications) {
         this.timeOfNotifications = timeOfNotifications;
     }
 
@@ -57,4 +62,24 @@ public class User {
     public void removeCurrency(String currency) {
         this.currency.remove(currency);
     }
+
+    public void checkCurrency(String currency){
+        if (this.currency.contains(currency)){
+            removeCurrency(currency);
+        }else {
+            addCurrency(currency);
+        }
+    }
+
+    public void currencyWasChanged(){
+        this.currencyIsDefault = false;
+        removeCurrency("USD");
+    }
+    public boolean isCurrencyDefault() {
+        return currencyIsDefault;
+    }
+
+
+
+
 }
