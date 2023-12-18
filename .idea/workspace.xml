@@ -4,17 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21121203-0bd1-40a7-8d9e-86430d86dbba" name="Changes" comment="add public String roundValue(int checkBox, float value) method to round currencyValue">
+    <list default="true" id="21121203-0bd1-40a7-8d9e-86430d86dbba" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RoundValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RoundValues.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/PrivatNew" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="4724e88b-f6e6-40e1-8e67-22b32555efd8" />
+        <option name="url" value="https://github.com/Dmitriy2028/TelegramCurrencyBot.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectId" id="2ZSBD0bmrFVvr9lMoQs1brByNxz" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
