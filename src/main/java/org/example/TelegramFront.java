@@ -57,14 +57,19 @@ public class TelegramFront extends TelegramLongPollingBot {
             data = update.getCallbackQuery().getData();
 
             if (update.getCallbackQuery().getData().matches("chars_after_coma_\\d")) {
-                //String data = update.getCallbackQuery().getData();
-                //System.out.println(data.substring(data.lastIndexOf('_') + 1));
-
                 users.get(chatId).setCharsAfterComa(Integer.valueOf(data.substring(data.lastIndexOf('_') + 1)));
-                //users.get(chatId).setCharsAfterComa(Integer.valueOf(charsAfterComaButtons().get(data)));
-                SendMessage message = createMessage(String.valueOf(users.get(chatId).getCharsAfterComa()));
-                message.setChatId(chatId);
-                sendApiMethodAsync(message);
+
+                EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
+                editedMessage.setChatId(chatId);
+                editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
+                editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
+                editedMessage.setReplyMarkup(changeButtons(charsAfterComaButtons(users.get(chatId))));
+
+                try {
+                    execute(editedMessage);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             if (update.getCallbackQuery().getData().matches("values_\\w+")) {
@@ -72,28 +77,28 @@ public class TelegramFront extends TelegramLongPollingBot {
                     users.get(chatId).currencyWasChanged();
                 }
                 users.get(chatId).checkCurrency(data.substring(data.lastIndexOf('_') + 1));
-                //users.get(chatId).checkCurrency(valuesButtons().get(data));
-                //SendMessage message = createMessage(users.get(chatId).getCurrency().toString());
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
-                editedMessage.setMessageId(update.getMessage().getMessageId());
+                editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
+                editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
                 editedMessage.setReplyMarkup(changeButtons(valuesButtons(users.get(chatId))));
 
+                try {
+                    execute(editedMessage);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             if (update.getCallbackQuery().getData().matches("time_of_notifications_\\w+")) {
-                //SendMessage message;
                 users.get(chatId).setTimeOfNotifications(data.substring(data.lastIndexOf('_') + 1));
-                //message = createMessage(users.get(chatId).getTimeOfNotifications());
-                //message.setChatId(chatId);
-                //sendApiMethodAsync(message);
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
-                editedMessage.setMessageId(update.getMessage().getMessageId());
+                editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(testButtons());
+                editedMessage.setReplyMarkup(changeButtons(timeOfNotificationsButtons(users.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -105,9 +110,18 @@ public class TelegramFront extends TelegramLongPollingBot {
             if (update.getCallbackQuery().getData().matches("bank_\\w+")) {
                 //String bankName = update.getCallbackQuery();
                 users.get(chatId).setBank(data.substring(data.lastIndexOf('_') + 1));
-                SendMessage message = createMessage(String.valueOf(BankNames.valueOf(users.get(chatId).getBank())));
-                message.setChatId(chatId);
-                sendApiMethodAsync(message);
+
+                EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
+                editedMessage.setChatId(chatId);
+                editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
+                editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
+                editedMessage.setReplyMarkup(changeButtons(bankButtons(users.get(chatId))));
+
+                try {
+                    execute(editedMessage);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
             }
 
             if (update.getCallbackQuery().getData().equals("get_info")) {
