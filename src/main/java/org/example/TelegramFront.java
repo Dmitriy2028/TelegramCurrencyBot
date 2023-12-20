@@ -1,5 +1,6 @@
 package org.example;
 
+import org.quartz.SchedulerException;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -26,11 +27,12 @@ public class TelegramFront extends TelegramLongPollingBot {
     public String getBotToken() {
         return "6939606814:AAHurPGRFOC36BlmekpJw31vujhlseh3pEI";
     }
-
+    NotificationJob notificationJob = new NotificationJob();
+    String data;
     @Override
     public void onUpdateReceived(Update update) {
         Long chatId = getChatId(update);
-        String data;
+
 
         if (update.hasMessage() && update.getMessage().getText().equals("/start")) {
             users.put(chatId, new User(chatId));
@@ -81,7 +83,19 @@ public class TelegramFront extends TelegramLongPollingBot {
 
             if (data.matches("time_of_notifications_\\w+")) {
                 users.get(chatId).setTimeOfNotifications(data.substring(data.lastIndexOf('_') + 1));
-
+                if (data.substring(data.lastIndexOf('_')+1)=="off"){
+                    try {
+                        notificationJob.removeNotification(users.get(chatId));
+                    } catch (SchedulerException e) {
+                        throw new RuntimeException(e);
+                    }
+                }else {
+                    try {
+                        notificationJob.setNotification(users.get(chatId));
+                    } catch (SchedulerException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
@@ -167,6 +181,10 @@ public class TelegramFront extends TelegramLongPollingBot {
             }
 
         }
+    }
+
+    protected void sendNotificationMessage(){
+
     }
 
     private LinkedHashMap<String, String> startButtons() {
