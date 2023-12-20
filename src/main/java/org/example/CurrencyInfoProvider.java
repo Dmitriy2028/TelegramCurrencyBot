@@ -1,25 +1,26 @@
 package org.example;
 
+import org.example.Mono.Mono;
+import org.example.nbu.Nbu;
+import org.example.privat.PrivatCurrencyService;
+
 public interface CurrencyInfoProvider {
     default String getCurrencyInfo(User user) {
+        PrivatCurrencyService privat = new PrivatCurrencyService();
+        Mono mono = new Mono();
+        Nbu nbu = new Nbu();
         String bankName = user.getBank();
-        String currencyInfo = "Курс валют ";
 
         switch (bankName) {
-            case "Приват":
-                currencyInfo += "в ПриватБанке";
-                break;
-            case "Моно":
-                currencyInfo += "в МоноБанке";
-                break;
-            case "НБУ":
-                currencyInfo += "в Национальном банке Украины";
-                break;
+            case "Privat":
+                return "Privat" + privat.getRate().toString();
+            case "Mono":
+                return "Mono" + mono.getCurrencyRates().toString();
+            case "NBU":
+                return "NBU" + nbu.getCource().toString();
             default:
-                currencyInfo += "в неизвестном банке";
+                return "Another bank";
         }
-
-        return currencyInfo;
     }
 }
 
