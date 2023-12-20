@@ -10,50 +10,51 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 public class Mono {
 
-    public static String getCurrencyRates(User user) {
-
+    public static LinkedHashMap<String, Double> getCurrencyRates() {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-
             HttpGet request = new HttpGet("https://api.monobank.ua/bank/currency");
 
             try (CloseableHttpResponse response = httpClient.execute(request)) {
                 if (response.getStatusLine().getStatusCode() == 200) {
                     HttpEntity entity = response.getEntity();
                     String result = EntityUtils.toString(entity);
-                    return processCurrencyData(result, user);
+                    return processCurrencyData(result);
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "Не вдалося отримати дані";
+        return new LinkedHashMap<>();
     }
 
-    private static String processCurrencyData(String jsonData, User user) {
-
+    private static LinkedHashMap<String, Double> processCurrencyData(String jsonData) {
         JSONArray jsonArray = new JSONArray(jsonData);
-        StringBuilder sb = new StringBuilder();
+        LinkedHashMap<String, Double> currencyRates = new LinkedHashMap<>();
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject currencyObject = jsonArray.getJSONObject(i);
             int currencyCodeA = currencyObject.getInt("currencyCodeA");
             int currencyCodeB = currencyObject.getInt("currencyCodeB");
-            if (currencyCodeB == 980 && (currencyCodeA == 840 || currencyCodeA == 978)) { // 840 - USD, 978 - EUR, 980 - UAH
-                String currencyName = currencyCodeA == 840 ? "Долар" : "Євро";
-                double rateBuy = currencyObject.getDouble("rateBuy");
-                double rateSell = currencyObject.getDouble("rateSell");
 
-                sb.append(currencyName)
-                        .append(" - курс купівлі: ")
-                        .append(String.format("%." + user.getCharsAfterComa() + "f", rateBuy))
-                        .append(", курс продажу: ")
-                        .append(String.format("%." + user.getCharsAfterComa() + "f", rateSell))
-                        .append("; ");
+            if (currencyCodeB == 980 && (currencyCodeA == 840 || currencyCodeA == 978)) {
+                String currencyName = currencyCodeA == 840 ? "USD" : "EUR";
+                Double rateBuy = currencyObject.getDouble("rateBuy");
+                Double rateSell = currencyObject.getDouble("rateSell");
+
+                currencyRates.put(currencyName + "_buy", rateBuy);
+                currencyRates.put(currencyName + "_sell", rateSell);
             }
         }
-        return sb.toString();
+
+        return currencyRates;
     }
 }
+
+
+
+
+
