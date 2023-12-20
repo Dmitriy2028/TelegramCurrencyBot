@@ -17,22 +17,22 @@ public class Nbu {
     private static final String EUR = "EUR";
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
-  public static Map<String, String> getCource(){
+    public static Map<String, Double> getCource(){
         return getCurrency();
     }
 
-    private static Map<String, String> getCurrency() {
-        final Map<String, String> mapCurrency = new LinkedHashMap<>();
+    private static Map<String, Double> getCurrency() {
+        final Map<String, Double> mapCurrency = new LinkedHashMap<>();
         final HttpResponse<String> response = sendGET(URI.create(NBU_URL));
         JSONArray jsonArray = new JSONArray(response.body());
         for (int i = 0; i <jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             if(USD.equals(jsonObject.getString("cc"))) {
-                mapCurrency.put("USD_buy", String.valueOf(jsonObject.getDouble("rate")));
-                mapCurrency.put("USD_sell", "0.0000");
+                mapCurrency.put("USD_buy", 0.0000d);
+                mapCurrency.put("USD_sell", jsonObject.getDouble("rate"));
             }else if (EUR.equals(jsonObject.getString("cc"))) {
-                mapCurrency.put("EUR_buy", String.valueOf(jsonObject.getDouble("rate")));
-                mapCurrency.put("EUR_sell", "0.0000");
+                mapCurrency.put("EUR_buy", 0.0000d);
+                mapCurrency.put("EUR_sell", jsonObject.getDouble("rate"));
             }
         }
         return mapCurrency;
