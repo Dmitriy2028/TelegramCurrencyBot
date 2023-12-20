@@ -12,8 +12,6 @@ public class User {
     private List<String> currency = new ArrayList<String>();
     private boolean currencyIsDefault;
 
-    private LinkedHashMap<String,String> bankButtons = new LinkedHashMap<>();
-
     public User(Long chatId) {
         this.chatId = chatId;
         this.charsAfterComa = 2;

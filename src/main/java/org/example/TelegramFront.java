@@ -2,7 +2,6 @@ package org.example;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -12,18 +11,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 
-
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class TelegramFront extends TelegramLongPollingBot {
-    private static HashMap<Long, User> users = new HashMap<>();
 
-    public static void main(String[] args) throws TelegramApiException {
-        TelegramBotsApi api = new TelegramBotsApi(DefaultBotSession.class);
-        api.registerBot(new TelegramFront());
-        //SetMyCommands
-    }
+    private static HashMap<Long, User> users = new HashMap<>();
 
     @Override
     public String getBotUsername() {
@@ -39,9 +31,6 @@ public class TelegramFront extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         Long chatId = getChatId(update);
         String data;
-//        update.getCallbackQuery().getMessage().getMessageId();
-//        update.getCallbackQuery().getMessage().getChatId();
-
 
         if (update.hasMessage() && update.getMessage().getText().equals("/start")) {
             users.put(chatId, new User(chatId));
@@ -53,10 +42,9 @@ public class TelegramFront extends TelegramLongPollingBot {
             sendApiMethodAsync(message);
         }
         if (update.hasCallbackQuery()) {
-            //System.out.println(update.getCallbackQuery().getMessage().getMessageId());
             data = update.getCallbackQuery().getData();
 
-            if (update.getCallbackQuery().getData().matches("chars_after_coma_\\d")) {
+            if (data.matches("chars_after_coma_\\d")) {
                 users.get(chatId).setCharsAfterComa(Integer.valueOf(data.substring(data.lastIndexOf('_') + 1)));
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
@@ -72,7 +60,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (update.getCallbackQuery().getData().matches("values_\\w+")) {
+            if (data.matches("values_\\w+")) {
                 if (users.get(chatId).isCurrencyDefault()) {
                     users.get(chatId).currencyWasChanged();
                 }
@@ -91,7 +79,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (update.getCallbackQuery().getData().matches("time_of_notifications_\\w+")) {
+            if (data.matches("time_of_notifications_\\w+")) {
                 users.get(chatId).setTimeOfNotifications(data.substring(data.lastIndexOf('_') + 1));
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
@@ -107,8 +95,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (update.getCallbackQuery().getData().matches("bank_\\w+")) {
-                //String bankName = update.getCallbackQuery();
+            if (data.matches("bank_\\w+")) {
                 users.get(chatId).setBank(data.substring(data.lastIndexOf('_') + 1));
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
@@ -124,7 +111,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (update.getCallbackQuery().getData().equals("get_info")) {
+            if (data.equals("get_info")) {
 
                 SendMessage message = createMessage("При натисканні на кнопку \"Отримати інфо\" користувач отримує актуальний курс відповідно до його налаштувань (округлення, банк і т.д.)");
                 message.setChatId(chatId);
@@ -134,7 +121,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (update.getCallbackQuery().getData().equals("settings")) {
+            if (data.equals("settings")) {
 
                 SendMessage message = createMessage("Налаштування");
                 message.setChatId(chatId);
@@ -143,7 +130,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (update.getCallbackQuery().getData().equals("chars_after_coma")) {
+            if (data.equals("chars_after_coma")) {
 
                 SendMessage message = createMessage("Виберіть кількість знаків після коми");
                 message.setChatId(chatId);
@@ -152,7 +139,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (update.getCallbackQuery().getData().equals("bank")) {
+            if (data.equals("bank")) {
 
                 SendMessage message = createMessage("Виберіть банк");
                 message.setChatId(chatId);
@@ -161,7 +148,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (update.getCallbackQuery().getData().equals("values")) {
+            if (data.equals("values")) {
 
                 SendMessage message = createMessage("Виберіть валюту");
                 message.setChatId(chatId);
@@ -170,7 +157,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (update.getCallbackQuery().getData().equals("time_of_notifications")) {
+            if (data.equals("time_of_notifications")) {
 
                 SendMessage message = createMessage("Виберіть час сповіщення");
                 message.setChatId(chatId);
@@ -281,7 +268,6 @@ public class TelegramFront extends TelegramLongPollingBot {
 
     private SendMessage createMessage(String text) {
         SendMessage message = new SendMessage();
-        //message.setText(new String(text.getBytes(), StandardCharsets.UTF_8));
         message.setText(text);
         message.setParseMode("markdown");
         return message;
@@ -303,7 +289,7 @@ public class TelegramFront extends TelegramLongPollingBot {
         message.setReplyMarkup(markup);
     }
 
-    private InlineKeyboardMarkup changeButtons( LinkedHashMap<String, String> buttons) {
+    private InlineKeyboardMarkup changeButtons(LinkedHashMap<String, String> buttons) {
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         for (String buttonValue : buttons.keySet()) {
@@ -317,16 +303,5 @@ public class TelegramFront extends TelegramLongPollingBot {
         }
         markup.setKeyboard(keyboard);
         return markup;
-    }
-
-    private InlineKeyboardMarkup testButtons() {
-        InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rows = new ArrayList<>();
-        inlineMarkup.setKeyboard(rows);
-        return inlineMarkup;
-    }
-
-    private void editButtons() {
-
     }
 }
