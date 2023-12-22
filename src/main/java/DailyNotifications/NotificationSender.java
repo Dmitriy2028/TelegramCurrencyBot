@@ -1,6 +1,6 @@
-package dailyNotifications;
-import org.example.TelegramFront;
-import org.example.User;
+package DailyNotifications;
+import TelegramBot.TelegramFront;
+import TelegramBot.User;
 
 import java.util.*;
 import java.time.ZonedDateTime;

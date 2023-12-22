@@ -4,18 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Added Test notification class">
-      <change afterPath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationSender.java" afterDir="false" />
+    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Added Notification class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/BankUtils/BankUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Enums/BankNames.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Rounding/RoundValues.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dailyNotifications/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationJob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationSchedule.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/CheckBoxButtons.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DailyNotifications/NotificationSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BankNames.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/BuySell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/BuySell.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/NotificationJob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/NotificationSender.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/OutputTextCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/OutputTextCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/OutputTextCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PrettyOutput/OutputTextCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TelegramFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +27,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -158,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703089789856</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added Notification class">
+      <created>1703254594283</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703254594283</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -220,7 +229,8 @@
     <MESSAGE value="Buttons status now changes in real time" />
     <MESSAGE value="Added class Main&#10;Some small changes in TelegramFront" />
     <MESSAGE value="Added Test notification class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Test notification class" />
+    <MESSAGE value="Added Notification class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Notification class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

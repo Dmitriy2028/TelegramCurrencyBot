@@ -1,6 +1,9 @@
-package org.example;
+package TelegramBot;
 
-import dailyNotifications.NotificationSender;
+import BankUtils.BankUtil;
+import Enums.BankNames;
+import PrettyOutput.OutputTextCreator;
+import DailyNotifications.NotificationSender;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
@@ -29,6 +32,8 @@ public class TelegramFront extends TelegramLongPollingBot {
 
     String data;
     NotificationSender notificationSender = new NotificationSender(this);
+    BankUtil bankUtil = new BankUtil();
+    OutputTextCreator outputTextCreator = new OutputTextCreator();
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -120,8 +125,11 @@ public class TelegramFront extends TelegramLongPollingBot {
             }
 
             if (data.equals("get_info")) {
+                //OutputTextCreator outputTextCreator = new OutputTextCreator();
 
-                SendMessage message = createMessage("При натисканні на кнопку \"Отримати інфо\" користувач отримує актуальний курс відповідно до його налаштувань (округлення, банк і т.д.)");
+                String infoMessage = outputTextCreator.prettyOutput(users.get(chatId),bankUtil.getCource(BankNames.valueOf(users.get(chatId).getBank())));
+
+                SendMessage message = createMessage(infoMessage);
                 message.setChatId(chatId);
 
                 attachButtons(message, getInfoButtons());
@@ -178,10 +186,14 @@ public class TelegramFront extends TelegramLongPollingBot {
     }
 
     public void sendNotificationMessage(Long chatId){
-        SendMessage message = createMessage("При натисканні на кнопку \"Отримати інфо\" користувач отримує актуальний курс відповідно до його налаштувань (округлення, банк і т.д.)");
+        //OutputTextCreator outputTextCreator = new OutputTextCreator();
+        String infoMessage = outputTextCreator.prettyOutput(users.get(chatId),bankUtil.getCource(BankNames.valueOf(users.get(chatId).getBank())));
+
+        SendMessage message = createMessage(infoMessage);
+
         message.setChatId(chatId);
 
-        attachButtons(message, getInfoButtons());
+        //attachButtons(message, getInfoButtons());
 
         sendApiMethodAsync(message);
     }
@@ -243,9 +255,9 @@ public class TelegramFront extends TelegramLongPollingBot {
     private LinkedHashMap<String, String> bankButtons(User user) {
         LinkedHashMap<String, String> bankButtons = new LinkedHashMap<String, String>();
 
-        bankButtons.put("bank_Nbu", "НБУ");
-        bankButtons.put("bank_Privat", "ПриватБанк");
-        bankButtons.put("bank_Mono", "Монобанк");
+        bankButtons.put("bank_NBU", "НБУ");
+        bankButtons.put("bank_PRIVAT", "ПриватБанк");
+        bankButtons.put("bank_MONO", "Монобанк");
 
         bankButtons.put("bank_" + user.getBank(), bankButtons.get("bank_" + user.getBank()) + "\u2705");
 

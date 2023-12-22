@@ -1,4 +1,4 @@
-package org.example;
+package TelegramBot;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,7 +15,7 @@ public class User {
     public User(Long chatId) {
         this.chatId = chatId;
         this.charsAfterComa = 2;
-        this.bank = "Privat";
+        this.bank = "PRIVAT";
         this.timeOfNotifications = "off";
         this.currency.add("USD");
         this.currencyIsDefault = true;
