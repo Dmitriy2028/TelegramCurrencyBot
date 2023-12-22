@@ -5,17 +5,17 @@ import java.util.LinkedHashMap;
 public class OutputTextCreator {
     public String prettyOutput(User user, LinkedHashMap<String, Double> returnFromBank) {
         StringBuilder result = new StringBuilder();
-        for (String currency : user.getCurrency()) {
+        for (String userCurrency : user.getCurrency()) {
             result.append("Курс в ")
                     .append(BankNames.valueOf(user.getBank()))
                     .append(": ")
-                    .append(currency)
+                    .append(userCurrency)
                     .append("/UAH\n");
-            for (String i : returnFromBank.keySet()) {
-                if (currency.equals(i.substring(0, i.indexOf('_')))) {
-                    result.append(BuySell.valueOf(i.substring(i.lastIndexOf('_') + 1)))
+            for (String bankCurrency : returnFromBank.keySet()) {
+                if (userCurrency.equals(bankCurrency.substring(0, bankCurrency.indexOf('_')))) {
+                    result.append(BuySell.valueOf(bankCurrency.substring(bankCurrency.lastIndexOf('_') + 1)))
                             .append(": ")
-                            .append(returnFromBank.get(i))
+                            .append(returnFromBank.get(bankCurrency))
                             .append("\n");
                 }
             }

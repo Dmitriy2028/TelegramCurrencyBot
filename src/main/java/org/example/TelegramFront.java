@@ -1,20 +1,19 @@
 package org.example;
 
-import org.quartz.SchedulerException;
+import dailyNotifications.NotificationSender;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 
 import java.util.*;
 
 public class TelegramFront extends TelegramLongPollingBot {
+
 
     private static HashMap<Long, User> users = new HashMap<>();
 
@@ -27,8 +26,10 @@ public class TelegramFront extends TelegramLongPollingBot {
     public String getBotToken() {
         return "6939606814:AAHurPGRFOC36BlmekpJw31vujhlseh3pEI";
     }
-    NotificationJob notificationJob = new NotificationJob();
+
     String data;
+    NotificationSender notificationSender = new NotificationSender(this);
+
     @Override
     public void onUpdateReceived(Update update) {
         Long chatId = getChatId(update);
@@ -84,17 +85,10 @@ public class TelegramFront extends TelegramLongPollingBot {
             if (data.matches("time_of_notifications_\\w+")) {
                 users.get(chatId).setTimeOfNotifications(data.substring(data.lastIndexOf('_') + 1));
                 if (data.substring(data.lastIndexOf('_')+1)=="off"){
-                    try {
-                        notificationJob.removeNotification(users.get(chatId));
-                    } catch (SchedulerException e) {
-                        throw new RuntimeException(e);
-                    }
+                    notificationSender.removeUser(users.get(chatId));
                 }else {
-                    try {
-                        notificationJob.setNotification(users.get(chatId));
-                    } catch (SchedulerException e) {
-                        throw new RuntimeException(e);
-                    }
+                    notificationSender.removeUser(users.get(chatId));
+                    notificationSender.addUser(users.get(chatId));
                 }
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
@@ -183,8 +177,13 @@ public class TelegramFront extends TelegramLongPollingBot {
         }
     }
 
-    protected void sendNotificationMessage(){
+    public void sendNotificationMessage(Long chatId){
+        SendMessage message = createMessage("При натисканні на кнопку \"Отримати інфо\" користувач отримує актуальний курс відповідно до його налаштувань (округлення, банк і т.д.)");
+        message.setChatId(chatId);
 
+        attachButtons(message, getInfoButtons());
+
+        sendApiMethodAsync(message);
     }
 
     private LinkedHashMap<String, String> startButtons() {

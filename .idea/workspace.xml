@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Added class Main&#10;Some small changes in TelegramFront">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/NotificationJob.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/NotificationSender.java" afterDir="false" />
+    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Added Test notification class">
+      <change afterPath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dailyNotifications/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationJob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationSchedule.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/CheckBoxButtons.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/NotificationJob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/NotificationSender.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/OutputTextCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/OutputTextCreator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TelegramFront.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703073260195</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added Test notification class">
+      <created>1703089789856</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1703089789856</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -205,6 +219,17 @@
     <MESSAGE value="menu changes" />
     <MESSAGE value="Buttons status now changes in real time" />
     <MESSAGE value="Added class Main&#10;Some small changes in TelegramFront" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added class Main&#10;Some small changes in TelegramFront" />
+    <MESSAGE value="Added Test notification class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Test notification class" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="org.quartz.SchedulerException" package="org.quartz" />
+          <option name="timeStamp" value="18" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
