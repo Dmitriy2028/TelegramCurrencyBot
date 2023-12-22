@@ -39,7 +39,6 @@ public class TelegramFront extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         Long chatId = getChatId(update);
 
-
         if (update.hasMessage() && update.getMessage().getText().equals("/start")) {
             users.put(chatId, new User(chatId));
             SendMessage message = createMessage("Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют");
@@ -68,7 +67,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (data.matches("values_\\w+")) {
+            else if (data.matches("values_\\w+")) {
                 if (users.get(chatId).isCurrencyDefault()) {
                     users.get(chatId).currencyWasChanged();
                 }
@@ -87,7 +86,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (data.matches("time_of_notifications_\\w+")) {
+            else if (data.matches("time_of_notifications_\\w+")) {
                 users.get(chatId).setTimeOfNotifications(data.substring(data.lastIndexOf('_') + 1));
                 if (data.substring(data.lastIndexOf('_')+1)=="off"){
                     notificationSender.removeUser(users.get(chatId));
@@ -108,7 +107,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (data.matches("bank_\\w+")) {
+            else if (data.matches("bank_\\w+")) {
                 users.get(chatId).setBank(data.substring(data.lastIndexOf('_') + 1));
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
@@ -124,7 +123,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 }
             }
 
-            if (data.equals("get_info")) {
+            else if (data.equals("get_info")) {
                 //OutputTextCreator outputTextCreator = new OutputTextCreator();
 
                 String infoMessage = outputTextCreator.prettyOutput(users.get(chatId),bankUtil.getCource(BankNames.valueOf(users.get(chatId).getBank())));
@@ -137,7 +136,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (data.equals("settings")) {
+            else if (data.equals("settings")) {
 
                 SendMessage message = createMessage("Налаштування");
                 message.setChatId(chatId);
@@ -146,7 +145,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (data.equals("chars_after_coma")) {
+            else if (data.equals("chars_after_coma")) {
 
                 SendMessage message = createMessage("Виберіть кількість знаків після коми");
                 message.setChatId(chatId);
@@ -155,7 +154,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (data.equals("bank")) {
+            else if (data.equals("bank")) {
 
                 SendMessage message = createMessage("Виберіть банк");
                 message.setChatId(chatId);
@@ -164,7 +163,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (data.equals("values")) {
+            else if (data.equals("values")) {
 
                 SendMessage message = createMessage("Виберіть валюту");
                 message.setChatId(chatId);
@@ -173,7 +172,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 sendApiMethodAsync(message);
             }
 
-            if (data.equals("time_of_notifications")) {
+            else if (data.equals("time_of_notifications")) {
 
                 SendMessage message = createMessage("Виберіть час сповіщення");
                 message.setChatId(chatId);
