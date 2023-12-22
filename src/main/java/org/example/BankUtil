@@ -65,7 +65,7 @@ public class BankUtil {
                 buy = "rate";
                 sell = "rate";
             } break;
-            case PRYVAT: {
+            case PRIVAT: {
                 url = PRYVAT_CASHLESS_URL;
                 currency_USD = USD;
                 currency_EUR = EUR;
