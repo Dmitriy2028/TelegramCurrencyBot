@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Updated NotificationSender.java">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Deleted dublicate code in TelegramFront.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BankUtils/BankUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BankUtils/BankUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DailyNotifications/NotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DailyNotifications/NotificationSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/BuySell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/BuySell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,7 +195,21 @@
       <option name="project" value="LOCAL" />
       <updated>1703329269226</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Telegram token and name now will be not commited">
+      <created>1703333537357</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1703333537357</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Deleted dublicate code in TelegramFront.java">
+      <created>1703334085270</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1703334085270</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -261,7 +276,9 @@
     <MESSAGE value="Updated TelegramFront.java" />
     <MESSAGE value="Updated OutputTextCreator.java" />
     <MESSAGE value="Updated NotificationSender.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated NotificationSender.java" />
+    <MESSAGE value="Telegram token and name now will be not commited" />
+    <MESSAGE value="Deleted dublicate code in TelegramFront.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Deleted dublicate code in TelegramFront.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

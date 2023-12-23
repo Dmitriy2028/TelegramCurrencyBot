@@ -1,14 +1,14 @@
 package Enums;
 
 public enum BuySell {
-    buy,
-    sell;
+    BUY,
+    SELL;
 
     @Override
     public String toString() {
         switch (this) {
-            case buy: return "Купівля";
-            case sell: return "Продаж";
+            case BUY: return "Купівля";
+            case SELL: return "Продаж";
         }
         return super.toString();
     }

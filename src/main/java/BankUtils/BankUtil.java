@@ -43,16 +43,16 @@ public class BankUtil {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             if( currency_USD.equals( String.valueOf (jsonObject.get(currencyCode)) ) ) {
-                mapCurrency.put("USD_buy", jsonObject.getDouble(buy));
-                mapCurrency.put("USD_sell", jsonObject.getDouble(sell));
+                mapCurrency.put("USD_BUY", jsonObject.getDouble(buy));
+                mapCurrency.put("USD_SELL", jsonObject.getDouble(sell));
             }else if ( currency_EUR.equals( String.valueOf (jsonObject.get(currencyCode))) ) {
                 // only for MONO, if it's rate EUR/USD then scip it
                 if(isMono) {
                     if (currency_USD.equals(String.valueOf(jsonObject.get(currencyCodeBmono))))
                         continue;
                 }
-                mapCurrency.put("EUR_buy", jsonObject.getDouble(buy));
-                mapCurrency.put("EUR_sell", jsonObject.getDouble(sell));
+                mapCurrency.put("EUR_BUY", jsonObject.getDouble(buy));
+                mapCurrency.put("EUR_SELL", jsonObject.getDouble(sell));
             }
         }
         isMono = false;

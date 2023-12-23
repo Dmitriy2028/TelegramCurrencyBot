@@ -10,10 +10,10 @@ import java.time.ZoneId;
 
 public class NotificationSender {
     private static TelegramFront bot;
-    private static Map<String, Set<User>> users = new HashMap<>();
+    private static final Map<String, Set<User>> users = new HashMap<>();
 
     public NotificationSender(TelegramFront bot) {
-        this.bot = bot;
+        NotificationSender.bot = bot;
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new HourlyTask(), getNextExecutionTime(), 60 * 60 * 1000);
     }
