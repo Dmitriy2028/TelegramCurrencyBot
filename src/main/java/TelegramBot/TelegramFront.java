@@ -44,7 +44,7 @@ public class TelegramFront extends TelegramLongPollingBot {
             SendMessage message = createMessage("Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют");
             message.setChatId(chatId);
 
-            attachButtons(message, startButtons());
+            message.setReplyMarkup(attachButtons(startButtons()));
 
             sendApiMethodAsync(message);
         }
@@ -58,7 +58,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(changeButtons(charsAfterComaButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(charsAfterComaButtons(users.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -77,7 +77,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(changeButtons(valuesButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(valuesButtons(users.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -98,7 +98,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(changeButtons(timeOfNotificationsButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(timeOfNotificationsButtons(users.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -114,7 +114,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(changeButtons(bankButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(bankButtons(users.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -131,7 +131,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage(infoMessage);
                 message.setChatId(chatId);
 
-                attachButtons(message, getInfoButtons());
+                message.setReplyMarkup(attachButtons(getInfoButtons()));
 
                 sendApiMethodAsync(message);
             }
@@ -141,7 +141,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Налаштування");
                 message.setChatId(chatId);
 
-                attachButtons(message, settingsButtons());
+                message.setReplyMarkup(attachButtons(settingsButtons()));
                 sendApiMethodAsync(message);
             }
 
@@ -150,7 +150,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть кількість знаків після коми");
                 message.setChatId(chatId);
 
-                attachButtons(message, charsAfterComaButtons(users.get(chatId)));
+                message.setReplyMarkup(attachButtons(charsAfterComaButtons(users.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -159,7 +159,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть банк");
                 message.setChatId(chatId);
 
-                attachButtons(message, bankButtons(users.get(chatId)));
+                message.setReplyMarkup(attachButtons(bankButtons(users.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -168,7 +168,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть валюту");
                 message.setChatId(chatId);
 
-                attachButtons(message, valuesButtons(users.get(chatId)));
+                message.setReplyMarkup(attachButtons(valuesButtons(users.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -177,7 +177,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть час сповіщення");
                 message.setChatId(chatId);
 
-                attachButtons(message, timeOfNotificationsButtons(users.get(chatId)));
+                message.setReplyMarkup(attachButtons(timeOfNotificationsButtons(users.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -301,23 +301,7 @@ public class TelegramFront extends TelegramLongPollingBot {
         return message;
     }
 
-    private void attachButtons(SendMessage message, LinkedHashMap<String, String> buttons) {
-        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        for (String buttonValue : buttons.keySet()) {
-            String buttonName = buttons.get(buttonValue);
-
-            InlineKeyboardButton button = new InlineKeyboardButton();
-            button.setText(buttonName);
-            button.setCallbackData(buttonValue);
-
-            keyboard.add(Arrays.asList(button));
-        }
-        markup.setKeyboard(keyboard);
-        message.setReplyMarkup(markup);
-    }
-
-    private InlineKeyboardMarkup changeButtons(LinkedHashMap<String, String> buttons) {
+    private InlineKeyboardMarkup attachButtons(LinkedHashMap<String, String> buttons) {
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         for (String buttonValue : buttons.keySet()) {
@@ -331,5 +315,6 @@ public class TelegramFront extends TelegramLongPollingBot {
         }
         markup.setKeyboard(keyboard);
         return markup;
+        //message.setReplyMarkup(markup);
     }
 }
