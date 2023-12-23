@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Refactored code&#10;Created packages">
+    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Updated OutputTextCreator.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DailyNotifications/NotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DailyNotifications/NotificationSender.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +172,21 @@
       <option name="project" value="LOCAL" />
       <updated>1703264499616</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Updated TelegramFront.java">
+      <created>1703264987602</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1703264987602</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Updated OutputTextCreator.java">
+      <created>1703265089624</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1703265089624</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,7 +250,9 @@
     <MESSAGE value="Added Test notification class" />
     <MESSAGE value="Added Notification class" />
     <MESSAGE value="Refactored code&#10;Created packages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored code&#10;Created packages" />
+    <MESSAGE value="Updated TelegramFront.java" />
+    <MESSAGE value="Updated OutputTextCreator.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated OutputTextCreator.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
