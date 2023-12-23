@@ -22,18 +22,18 @@ public class TelegramFront extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "Currency_group4_Bot";
+        return TelegramBotValues.NAME.toString();
     }
 
     @Override
     public String getBotToken() {
-        return "6939606814:AAHurPGRFOC36BlmekpJw31vujhlseh3pEI";
+        return TelegramBotValues.TOKEN.toString();
     }
 
-    String data;
-    NotificationSender notificationSender = new NotificationSender(this);
-    BankUtil bankUtil = new BankUtil();
-    OutputTextCreator outputTextCreator = new OutputTextCreator();
+    private String data;
+    private NotificationSender notificationSender = new NotificationSender(this);
+    private BankUtil bankUtil = new BankUtil();
+    private OutputTextCreator outputTextCreator = new OutputTextCreator();
 
     @Override
     public void onUpdateReceived(Update update) {
