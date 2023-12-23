@@ -26,72 +26,92 @@ public class BankUtil {
     private String currency_USD;
     private String currency_EUR;
     private String currencyCode;
-    private String currencyCodeBmono;
+    private String currencyCodeB_mono;   // to check and scip the rate of EUR/USD in MONO json
     private String buy;
     private String sell;
-    private boolean isMono = false;
+    private boolean isMono;
 
-    public Map<String, Double> getCource(BankNames bankName){
+    public Map<String, Double> getCource(BankNames bankName) {
         setVariablesForBank(bankName);
         return getCurrency();
     }
 
-    private  Map<String, Double> getCurrency() {
+    private Map<String, Double> getCurrency() {
         final Map<String, Double> mapCurrency = new LinkedHashMap<>();
         final HttpResponse<String> response = sendGET(URI.create(url));
         JSONArray jsonArray = new JSONArray(response.body());
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            if( currency_USD.equals( String.valueOf (jsonObject.get(currencyCode)) ) ) {
-                mapCurrency.put("USD_buy", jsonObject.getDouble(buy));
-                mapCurrency.put("USD_sell", jsonObject.getDouble(sell));
-            }else if ( currency_EUR.equals( String.valueOf (jsonObject.get(currencyCode))) ) {
-                // only for MONO, if it's rate EUR/USD then scip it
-                if(isMono) {
-                    if (currency_USD.equals(String.valueOf(jsonObject.get(currencyCodeBmono))))
+        return selectCurrency(mapCurrency, jsonArray);
+    }
+
+    private Map<String, Double> selectCurrency(Map<String, Double> map, JSONArray jsonArr) {
+        for (int i = 0; i < jsonArr.length(); i++) {
+            JSONObject jsonObject = jsonArr.getJSONObject(i);
+            if (currency_USD.equals(String.valueOf(jsonObject.get(currencyCode)))) {
+                addCurrencyToMap(map, jsonObject, USD);
+            } else if (currency_EUR.equals(String.valueOf(jsonObject.get(currencyCode)))) {
+                // only for MONO, if it's rate for EUR/USD then scip it
+                if (isMono) {
+                    if (currency_USD.equals(String.valueOf(jsonObject.get(currencyCodeB_mono))))
                         continue;
                 }
-                mapCurrency.put("EUR_buy", jsonObject.getDouble(buy));
-                mapCurrency.put("EUR_sell", jsonObject.getDouble(sell));
+                addCurrencyToMap(map, jsonObject, EUR);
             }
         }
-        isMono = false;
-        return mapCurrency;
+        return map;
     }
 
-    private  void setVariablesForBank(BankNames bankName) {
-        switch (bankName){
-            case NBU: {
-                url = NBU_URL;
-                currency_USD = USD;
-                currency_EUR = EUR;
-                currencyCode = "cc";
-                buy = "rate";
-                sell = "rate";
-            } break;
-            case PRIVAT: {
-                url = PRIVAT_CASHLESS_URL;
-                currency_USD = USD;
-                currency_EUR = EUR;
-                currencyCode = "ccy";
-                buy = "buy";
-                sell = "sale";
-            }break;
-            case MONO: {
-                url = MONO_URL;
-                currency_USD = "840";
-                currency_EUR = "978";
-                currencyCode = "currencyCodeA";
-                // to scip  rate EUR/USD
-                isMono = true;
-                currencyCodeBmono = "currencyCodeB";
-                buy = "rateBuy";
-                sell = "rateSell";
-            }
+    private void addCurrencyToMap(Map<String, Double> map, JSONObject jsonObject, String currencyAcronym) {
+        map.put(currencyAcronym + "_buy", jsonObject.getDouble(buy));
+        map.put(currencyAcronym + "_sell", jsonObject.getDouble(sell));
+    }
+
+    private void setVariablesForBank(BankNames bankName) {
+        switch (bankName) {
+            case NBU -> initVarForBank(
+                    NBU_URL
+                    , USD
+                    , EUR
+                    , "cc"
+                    , "none"
+                    , "rate"
+                    , "rate"
+                    , false
+            );
+            case PRIVAT -> initVarForBank(
+                    PRIVAT_CASHLESS_URL
+                    , USD
+                    , EUR
+                    , "ccy"
+                    , "none"
+                    , "buy"
+                    , "sale"
+                    , false
+            );
+            case MONO -> initVarForBank(
+                    MONO_URL
+                    , "840"
+                    , "978"
+                    , "currencyCodeA"
+                    , "currencyCodeB"
+                    , "rateBuy"
+                    , "rateSell"
+                    , true
+            );
         }
     }
 
-    private HttpResponse<String> sendGET(URI uri)  {
+    private void initVarForBank(String url, String currency_USD, String currency_EUR, String currencyCode, String currencyCodeBmono, String buy, String sell, boolean isMono) {
+        this.url = url;
+        this.currency_USD = currency_USD;
+        this.currency_EUR = currency_EUR;
+        this.currencyCode = currencyCode;
+        this.currencyCodeB_mono = currencyCodeBmono;
+        this.buy = buy;
+        this.sell = sell;
+        this.isMono = isMono;
+    }
+
+    private HttpResponse<String> sendGET(URI uri) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .build();
