@@ -1,9 +1,9 @@
-package PrettyOutput;
+package prettyOutput;
 
-import Enums.BankNames;
-import Enums.BuySell;
-import Rounding.RoundValues;
-import TelegramBot.User;
+import enums.BankNames;
+import enums.BuySell;
+import rounding.RoundValues;
+import telegramBot.User;
 
 import java.util.Map;
 
@@ -20,7 +20,8 @@ public class OutputTextCreator {
                     .append("/UAH\n");
             for (String bankCurrency : returnFromBank.keySet()) {
                 if (userCurrency.equals(bankCurrency.substring(0, bankCurrency.indexOf('_')))) {
-                    result.append("     " + BuySell.valueOf(bankCurrency.substring(bankCurrency.lastIndexOf('_') + 1)))
+                    result.append("     ")
+                            .append(BuySell.valueOf(bankCurrency.substring(bankCurrency.lastIndexOf('_') + 1)))
                             .append(": ")
                             .append(rv.roundValue(returnFromBank.get(bankCurrency)))
                             .append("\n");

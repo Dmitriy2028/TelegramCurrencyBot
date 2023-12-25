@@ -4,9 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Refactored code&#10;Created packages">
+    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Another small syntax changes, updated class BankUtil.java">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AppLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppLauncher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BankUtils/BankUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bankUtils/BankUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DailyNotifications/NotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/BankNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/BankNames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/BuySell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/BuySell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/PrettyOutput/OutputTextCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/prettyOutput/OutputTextCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Rounding/RoundValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rounding/RoundValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/telegramBot/TelegramFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/telegramBot/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +181,63 @@
       <option name="project" value="LOCAL" />
       <updated>1703264499616</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Updated TelegramFront.java">
+      <created>1703264987602</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1703264987602</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Updated OutputTextCreator.java">
+      <created>1703265089624</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1703265089624</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated NotificationSender.java">
+      <created>1703329269226</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1703329269226</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Telegram token and name now will be not commited">
+      <created>1703333537357</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1703333537357</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Deleted dublicate code in TelegramFront.java">
+      <created>1703334085270</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1703334085270</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Small syntax changes">
+      <created>1703334919970</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1703334919970</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Another small syntax changes">
+      <created>1703516017125</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1703516017125</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Another small syntax changes, updated class BankUtil.java">
+      <created>1703518805881</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1703518805881</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -211,7 +276,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="ComboBoxButtons" />
+                        <option value="TelegramFrontDev" />
                       </list>
                     </value>
                   </entry>
@@ -236,7 +301,15 @@
     <MESSAGE value="Added Test notification class" />
     <MESSAGE value="Added Notification class" />
     <MESSAGE value="Refactored code&#10;Created packages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactored code&#10;Created packages" />
+    <MESSAGE value="Updated TelegramFront.java" />
+    <MESSAGE value="Updated OutputTextCreator.java" />
+    <MESSAGE value="Updated NotificationSender.java" />
+    <MESSAGE value="Telegram token and name now will be not commited" />
+    <MESSAGE value="Deleted dublicate code in TelegramFront.java" />
+    <MESSAGE value="Small syntax changes" />
+    <MESSAGE value="Another small syntax changes" />
+    <MESSAGE value="Another small syntax changes, updated class BankUtil.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Another small syntax changes, updated class BankUtil.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
