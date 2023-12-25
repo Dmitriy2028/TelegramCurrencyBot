@@ -1,6 +1,6 @@
-package BankUtils;
+package bankUtils;
 
-import Enums.BankNames;
+import enums.BankNames;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -26,7 +26,7 @@ public class BankUtil {
     private String currency_USD;
     private String currency_EUR;
     private String currencyCode;
-    private String currencyCodeB_mono;   // to check and scip the rate of EUR/USD in MONO json
+    private String currencyCodeB_mono;   // to check and skip the rate of EUR/USD in MONO json
     private String buy;
     private String sell;
     private boolean isMono;
@@ -57,12 +57,13 @@ public class BankUtil {
                 addCurrencyToMap(map, jsonObject, EUR);
             }
         }
+        isMono = false;
         return map;
     }
 
     private void addCurrencyToMap(Map<String, Double> map, JSONObject jsonObject, String currencyAcronym) {
-        map.put(currencyAcronym + "_buy", jsonObject.getDouble(buy));
-        map.put(currencyAcronym + "_sell", jsonObject.getDouble(sell));
+        map.put(currencyAcronym + "_BUY", jsonObject.getDouble(buy));
+        map.put(currencyAcronym + "_SELL", jsonObject.getDouble(sell));
     }
 
     private void setVariablesForBank(BankNames bankName) {
@@ -118,9 +119,7 @@ public class BankUtil {
         HttpResponse<String> response = null;
         try {
             response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
         return response;
