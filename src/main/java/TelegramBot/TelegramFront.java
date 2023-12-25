@@ -18,7 +18,11 @@ import java.util.*;
 public class TelegramFront extends TelegramLongPollingBot {
 
 
-    private static HashMap<Long, User> users = new HashMap<>();
+    private static final Map<Long, User> USERS = new HashMap<>();
+
+//    List commandsList = new ArrayList();
+//    commandsList.add(new BotCommand("commandName", "description"));
+//    this.execute(new SetMyCommands(commands));
 
     @Override
     public String getBotUsername() {
@@ -30,17 +34,16 @@ public class TelegramFront extends TelegramLongPollingBot {
         return TelegramBotValues.TOKEN.toString();
     }
 
-    private String data;
-    private NotificationSender notificationSender = new NotificationSender(this);
-    private BankUtil bankUtil = new BankUtil();
-    private OutputTextCreator outputTextCreator = new OutputTextCreator();
+    private final NotificationSender notificationSender = new NotificationSender(this);
+    private final BankUtil bankUtil = new BankUtil();
+    private final OutputTextCreator outputTextCreator = new OutputTextCreator();
 
     @Override
     public void onUpdateReceived(Update update) {
         Long chatId = getChatId(update);
 
         if (update.hasMessage() && update.getMessage().getText().equals("/start")) {
-            users.put(chatId, new User(chatId));
+            USERS.put(chatId, new User(chatId));
             SendMessage message = createMessage("Ласкаво просимо. Цей бот допоможе відслідковувати актуальні курси валют");
             message.setChatId(chatId);
 
@@ -49,16 +52,16 @@ public class TelegramFront extends TelegramLongPollingBot {
             sendApiMethodAsync(message);
         }
         if (update.hasCallbackQuery()) {
-            data = update.getCallbackQuery().getData();
+            String data = update.getCallbackQuery().getData();
 
             if (data.matches("chars_after_coma_\\d")) {
-                users.get(chatId).setCharsAfterComa(Integer.valueOf(data.substring(data.lastIndexOf('_') + 1)));
+                USERS.get(chatId).setCharsAfterComa(Integer.parseInt(data.substring(data.lastIndexOf('_') + 1)));
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(attachButtons(charsAfterComaButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(charsAfterComaButtons(USERS.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -68,16 +71,16 @@ public class TelegramFront extends TelegramLongPollingBot {
             }
 
             else if (data.matches("values_\\w+")) {
-                if (users.get(chatId).isCurrencyDefault()) {
-                    users.get(chatId).currencyWasChanged();
+                if (USERS.get(chatId).isCurrencyDefault()) {
+                    USERS.get(chatId).currencyWasChanged();
                 }
-                users.get(chatId).checkCurrency(data.substring(data.lastIndexOf('_') + 1));
+                USERS.get(chatId).checkCurrency(data.substring(data.lastIndexOf('_') + 1));
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(attachButtons(valuesButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(valuesButtons(USERS.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -87,18 +90,18 @@ public class TelegramFront extends TelegramLongPollingBot {
             }
 
             else if (data.matches("time_of_notifications_\\w+")) {
-                users.get(chatId).setTimeOfNotifications(data.substring(data.lastIndexOf('_') + 1));
-                if (data.substring(data.lastIndexOf('_')+1)=="off"){
-                    notificationSender.removeUser(users.get(chatId));
+                USERS.get(chatId).setTimeOfNotifications(data.substring(data.lastIndexOf('_') + 1));
+                if (data.substring(data.lastIndexOf('_')+1).equals("off")){
+                    notificationSender.removeUser(USERS.get(chatId));
                 }else {
-                    notificationSender.removeUser(users.get(chatId));
-                    notificationSender.addUser(users.get(chatId));
+                    notificationSender.removeUser(USERS.get(chatId));
+                    notificationSender.addUser(USERS.get(chatId));
                 }
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(attachButtons(timeOfNotificationsButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(timeOfNotificationsButtons(USERS.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -108,13 +111,13 @@ public class TelegramFront extends TelegramLongPollingBot {
             }
 
             else if (data.matches("bank_\\w+")) {
-                users.get(chatId).setBank(data.substring(data.lastIndexOf('_') + 1));
+                USERS.get(chatId).setBank(data.substring(data.lastIndexOf('_') + 1));
 
                 EditMessageReplyMarkup editedMessage = new EditMessageReplyMarkup();
                 editedMessage.setChatId(chatId);
                 editedMessage.setMessageId(update.getCallbackQuery().getMessage().getMessageId());
                 editedMessage.setInlineMessageId(update.getCallbackQuery().getInlineMessageId());
-                editedMessage.setReplyMarkup(attachButtons(bankButtons(users.get(chatId))));
+                editedMessage.setReplyMarkup(attachButtons(bankButtons(USERS.get(chatId))));
 
                 try {
                     execute(editedMessage);
@@ -126,7 +129,7 @@ public class TelegramFront extends TelegramLongPollingBot {
             else if (data.equals("get_info")) {
                 //OutputTextCreator outputTextCreator = new OutputTextCreator();
 
-                String infoMessage = outputTextCreator.prettyOutput(users.get(chatId),bankUtil.getCource(BankNames.valueOf(users.get(chatId).getBank())));
+                String infoMessage = outputTextCreator.prettyOutput(USERS.get(chatId),bankUtil.getCource(BankNames.valueOf(USERS.get(chatId).getBank())));
 
                 SendMessage message = createMessage(infoMessage);
                 message.setChatId(chatId);
@@ -150,7 +153,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть кількість знаків після коми");
                 message.setChatId(chatId);
 
-                message.setReplyMarkup(attachButtons(charsAfterComaButtons(users.get(chatId))));
+                message.setReplyMarkup(attachButtons(charsAfterComaButtons(USERS.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -159,7 +162,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть банк");
                 message.setChatId(chatId);
 
-                message.setReplyMarkup(attachButtons(bankButtons(users.get(chatId))));
+                message.setReplyMarkup(attachButtons(bankButtons(USERS.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -168,7 +171,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть валюту");
                 message.setChatId(chatId);
 
-                message.setReplyMarkup(attachButtons(valuesButtons(users.get(chatId))));
+                message.setReplyMarkup(attachButtons(valuesButtons(USERS.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -177,7 +180,7 @@ public class TelegramFront extends TelegramLongPollingBot {
                 SendMessage message = createMessage("Виберіть час сповіщення");
                 message.setChatId(chatId);
 
-                message.setReplyMarkup(attachButtons(timeOfNotificationsButtons(users.get(chatId))));
+                message.setReplyMarkup(attachButtons(timeOfNotificationsButtons(USERS.get(chatId))));
                 sendApiMethodAsync(message);
             }
 
@@ -186,7 +189,7 @@ public class TelegramFront extends TelegramLongPollingBot {
 
     public void sendNotificationMessage(Long chatId){
         //OutputTextCreator outputTextCreator = new OutputTextCreator();
-        String infoMessage = outputTextCreator.prettyOutput(users.get(chatId),bankUtil.getCource(BankNames.valueOf(users.get(chatId).getBank())));
+        String infoMessage = outputTextCreator.prettyOutput(USERS.get(chatId),bankUtil.getCource(BankNames.valueOf(USERS.get(chatId).getBank())));
 
         SendMessage message = createMessage(infoMessage);
 
@@ -197,74 +200,75 @@ public class TelegramFront extends TelegramLongPollingBot {
         sendApiMethodAsync(message);
     }
 
-    private LinkedHashMap<String, String> startButtons() {
-        LinkedHashMap<String, String> startButtons = new LinkedHashMap<String, String>();
+    private Map<String, String> startButtons() {
+        Map<String, String> startButtons = new LinkedHashMap<>();
 
-        startButtons.put("get_info", "Отримати інфо");
-        startButtons.put("settings", "Налаштування");
+        startButtons.put("get_info", "Отримати інфо ℹ️");
+        startButtons.put("settings", "Налаштування ⚙️");
 
         return startButtons;
     }
 
-    private LinkedHashMap<String, String> getInfoButtons() {
-        LinkedHashMap<String, String> getInfoButtons = new LinkedHashMap<String, String>();
+    private Map<String, String> getInfoButtons() {
+        Map<String, String> getInfoButtons = new LinkedHashMap<>();
 
-        getInfoButtons.put("get_info", "Отримати інфо");
-        getInfoButtons.put("settings", "Налаштування");
+        getInfoButtons.put("get_info", "Отримати інфо ℹ️");
+        getInfoButtons.put("settings", "Налаштування ⚙️");
 
         return getInfoButtons;
     }
 
-    private LinkedHashMap<String, String> settingsButtons() {
-        LinkedHashMap<String, String> settingsButtons = new LinkedHashMap<String, String>();
+    private Map<String, String> settingsButtons() {
+        Map<String, String> settingsButtons = new LinkedHashMap<>();
 
-        settingsButtons.put("chars_after_coma", "Кількість знаків після коми");
-        settingsButtons.put("bank", "Банк");
-        settingsButtons.put("values", "Валюти");
-        settingsButtons.put("time_of_notifications", "Час сповіщень");
+        settingsButtons.put("chars_after_coma", "Кількість знаків після коми \uD83D\uDD22");
+        settingsButtons.put("bank", "Банк \uD83C\uDFE6");
+        settingsButtons.put("values", "Валюти \uD83D\uDCB0");
+        settingsButtons.put("time_of_notifications", "Час сповіщень \uD83D\uDD53");
 
         return settingsButtons;
     }
 
-    private LinkedHashMap<String, String> charsAfterComaButtons(User user) {
-        LinkedHashMap<String, String> charsAfterComaButtons = new LinkedHashMap<String, String>();
+    private Map<String, String> charsAfterComaButtons(User user) {
+        Map<String, String> charsAfterComaButtons = new LinkedHashMap<>();
 
         charsAfterComaButtons.put("chars_after_coma_2", "2");
         charsAfterComaButtons.put("chars_after_coma_3", "3");
         charsAfterComaButtons.put("chars_after_coma_4", "4");
 
-        charsAfterComaButtons.put("chars_after_coma_" + user.getCharsAfterComa(), user.getCharsAfterComa() + "\u2705");
+        charsAfterComaButtons.put("chars_after_coma_" + user.getCharsAfterComa(), user.getCharsAfterComa() + "✅");
 
         return charsAfterComaButtons;
     }
 
-    private LinkedHashMap<String, String> valuesButtons(User user) {
-        LinkedHashMap<String, String> valuesButtons = new LinkedHashMap<String, String>();
+    private Map<String, String> valuesButtons(User user) {
+         Map<String, String> valuesButtons = new LinkedHashMap<>();
 
         valuesButtons.put("values_USD", "USD");
         valuesButtons.put("values_EUR", "EUR");
         if (!user.isCurrencyDefault()) {
             for (String currency : user.getCurrency()) {
-                valuesButtons.put("values_" + currency, currency + "\u2705");
+                valuesButtons.put("values_" + currency, currency + "✅");
             }
         }
         return valuesButtons;
     }
 
-    private LinkedHashMap<String, String> bankButtons(User user) {
-        LinkedHashMap<String, String> bankButtons = new LinkedHashMap<String, String>();
+    private Map<String, String> bankButtons(User user) {
+        Map<String, String> bankButtons = new LinkedHashMap<>();
 
         bankButtons.put("bank_NBU", "НБУ");
         bankButtons.put("bank_PRIVAT", "ПриватБанк");
         bankButtons.put("bank_MONO", "Монобанк");
 
-        bankButtons.put("bank_" + user.getBank(), bankButtons.get("bank_" + user.getBank()) + "\u2705");
+        bankButtons.put("bank_" + user.getBank(), bankButtons.get("bank_" + user.getBank()) + "✅");
 
         return bankButtons;
     }
 
-    private LinkedHashMap<String, String> timeOfNotificationsButtons(User user) {
-        LinkedHashMap<String, String> timeOfNotificationsButtons = new LinkedHashMap<String, String>();
+    private Map<String, String> timeOfNotificationsButtons(User user) {
+        Map<String, String> timeOfNotificationsButtons = new LinkedHashMap<>();
+
         timeOfNotificationsButtons.put("time_of_notifications_9", "9");
         timeOfNotificationsButtons.put("time_of_notifications_10", "10");
         timeOfNotificationsButtons.put("time_of_notifications_11", "11");
@@ -277,7 +281,7 @@ public class TelegramFront extends TelegramLongPollingBot {
         timeOfNotificationsButtons.put("time_of_notifications_18", "18");
         timeOfNotificationsButtons.put("time_of_notifications_off", "Вимкнути сповіщення");
 
-        timeOfNotificationsButtons.put("time_of_notifications_" + user.getTimeOfNotifications(), user.getTimeOfNotifications() + "\u2705");
+        timeOfNotificationsButtons.put("time_of_notifications_" + user.getTimeOfNotifications(), user.getTimeOfNotifications() + "✅");
 
         return timeOfNotificationsButtons;
     }
@@ -301,7 +305,7 @@ public class TelegramFront extends TelegramLongPollingBot {
         return message;
     }
 
-    private InlineKeyboardMarkup attachButtons(LinkedHashMap<String, String> buttons) {
+    private InlineKeyboardMarkup attachButtons(Map<String, String> buttons) {
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         for (String buttonValue : buttons.keySet()) {
@@ -311,7 +315,7 @@ public class TelegramFront extends TelegramLongPollingBot {
             button.setText(buttonName);
             button.setCallbackData(buttonValue);
 
-            keyboard.add(Arrays.asList(button));
+            keyboard.add(List.of(button));
         }
         markup.setKeyboard(keyboard);
         return markup;
