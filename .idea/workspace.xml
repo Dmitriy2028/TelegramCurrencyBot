@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Small syntax changes">
+    <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Another small syntax changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PrettyOutput/OutputTextCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/PrettyOutput/OutputTextCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BankUtils/BankUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BankUtils/BankUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/BankNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/BankNames.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/BuySell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Enums/BuySell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Rounding/RoundValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Rounding/RoundValues.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TelegramBot/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703334919970</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Another small syntax changes">
+      <created>1703516017125</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1703516017125</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,7 +295,8 @@
     <MESSAGE value="Telegram token and name now will be not commited" />
     <MESSAGE value="Deleted dublicate code in TelegramFront.java" />
     <MESSAGE value="Small syntax changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small syntax changes" />
+    <MESSAGE value="Another small syntax changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Another small syntax changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

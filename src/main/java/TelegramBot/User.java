@@ -1,19 +1,18 @@
 package TelegramBot;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class User {
-    private Long chatId;
+    private final Long CHAT_ID;
     private int charsAfterComa;
     private String bank;
     private String timeOfNotifications;
-    private List<String> currency = new ArrayList<String>();
+    private List<String> currency = new ArrayList<>();
     private boolean currencyIsDefault;
 
     public User(Long chatId) {
-        this.chatId = chatId;
+        this.CHAT_ID = chatId;
         this.charsAfterComa = 2;
         this.bank = "PRIVAT";
         this.timeOfNotifications = "off";
@@ -22,7 +21,7 @@ public class User {
     }
 
     public Long getChatId() {
-        return chatId;
+        return CHAT_ID;
     }
 
     public int getCharsAfterComa() {

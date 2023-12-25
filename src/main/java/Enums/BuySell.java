@@ -6,10 +6,9 @@ public enum BuySell {
 
     @Override
     public String toString() {
-        switch (this) {
-            case BUY: return "Купівля";
-            case SELL: return "Продаж";
-        }
-        return super.toString();
+        return switch (this) {
+            case BUY -> "Купівля";
+            case SELL -> "Продаж";
+        };
     }
 }

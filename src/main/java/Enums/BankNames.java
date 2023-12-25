@@ -7,11 +7,10 @@ public enum BankNames {
 
     @Override
     public String toString() {
-        switch (this) {
-            case PRIVAT: return "Приватбанк";
-            case NBU: return "НБУ";
-            case MONO: return "Monobank";
-        }
-        return super.toString();
+        return switch (this) {
+            case PRIVAT -> "Приватбанк";
+            case NBU -> "НБУ";
+            case MONO -> "Monobank";
+        };
     }
 }

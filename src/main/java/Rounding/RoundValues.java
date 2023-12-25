@@ -4,23 +4,19 @@ import java.text.DecimalFormat;
 
 public class RoundValues {
     /** use public String roundValue(int checkBox, float value) to get rounded value*/
-    private int checkBox;
+    private final int checkBox;
     public RoundValues(int checkBox) {
         this.checkBox = checkBox;
     }
 
     public String roundValue(Double value){
-        switch (checkBox){
-            case (1):
-                return  formatOutputData(value, "#.#" );
-            case (2) :
-                return   formatOutputData(value, "#.##");
-            case (3):
-                return   formatOutputData(value, "#.###");
-            case (4):
-                return   formatOutputData(value, "#.####");
-        }
-        return "Invalid command";
+        return switch (checkBox) {
+            case (1) -> formatOutputData(value, "#.#");
+            case (2) -> formatOutputData(value, "#.##");
+            case (3) -> formatOutputData(value, "#.###");
+            case (4) -> formatOutputData(value, "#.####");
+            default -> "Invalid command";
+        };
     }
 
     private String formatOutputData(Double value, String pattern){
