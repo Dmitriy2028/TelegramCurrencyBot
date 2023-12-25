@@ -2,6 +2,8 @@ package telegramBot;
 
 import bankUtils.BankUtil;
 import enums.BankNames;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import prettyOutput.OutputTextCreator;
 import dailyNotifications.NotificationSender;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -19,10 +21,6 @@ public class TelegramFront extends TelegramLongPollingBot {
 
 
     private static final Map<Long, User> USERS = new HashMap<>();
-
-//    List commandsList = new ArrayList();
-//    commandsList.add(new BotCommand("commandName", "description"));
-//    this.execute(new SetMyCommands(commands));
 
     @Override
     public String getBotUsername() {
@@ -42,9 +40,14 @@ public class TelegramFront extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         Long chatId = getChatId(update);
 
-        if (update.hasMessage() && update.getMessage().getText().equals("/start")) {
-            onStart(chatId);
-        }
+        if (update.hasMessage())
+            if (update.getMessage().getText().equals("/start")) {
+                onStart(chatId);
+            } else if (update.getMessage().getText().equals("/get_info")) {
+                getInfoSelect(chatId);
+            } else if (update.getMessage().getText().equals("/settings")) {
+                settingsSelect(chatId);
+            }
         if (update.hasCallbackQuery()) {
             String data = update.getCallbackQuery().getData();
 

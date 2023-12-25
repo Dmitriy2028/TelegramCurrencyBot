@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a3e43a2d-bbed-4299-b7fb-b77b3b770041" name="Changes" comment="Another small syntax changes, updated class BankUtil.java">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AppLauncher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AppLauncher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/BankUtils/BankUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bankUtils/BankUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DailyNotifications/NotificationSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dailyNotifications/NotificationSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/BankNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/BankNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Enums/BuySell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/enums/BuySell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/PrettyOutput/OutputTextCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/prettyOutput/OutputTextCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Rounding/RoundValues.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rounding/RoundValues.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/telegramBot/TelegramFront.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TelegramBot/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/telegramBot/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/telegramBot/TelegramFront.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/telegramBot/TelegramFront.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="TelegramFrontDev" />
+        <entry key="$PROJECT_DIR$" value="DailyNotification" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,24 +53,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Dmitriy/IdeaProjects/TelegramCurrencyBot",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.editor"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dmitriy/IdeaProjects/TelegramCurrencyBot&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Dmitriy\IdeaProjects\TelegramCurrencyBot" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="telegramBot" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
