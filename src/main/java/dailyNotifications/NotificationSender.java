@@ -1,7 +1,7 @@
-package DailyNotifications;
+package dailyNotifications;
 
-import TelegramBot.TelegramFront;
-import TelegramBot.User;
+import telegramBot.TelegramFront;
+import telegramBot.User;
 
 import java.time.temporal.ChronoUnit;
 import java.util.*;

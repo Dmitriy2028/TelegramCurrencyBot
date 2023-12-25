@@ -1,6 +1,6 @@
-package BankUtils;
+package bankUtils;
 
-import Enums.BankNames;
+import enums.BankNames;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

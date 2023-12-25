@@ -38,4 +38,4 @@ build/
 ### Mac OS ###
 .DS_Store
 /src/main/java/TelegramBotToken/TelegramBotValues.java
-/src/main/java/TelegramBot/TelegramBotValues.java
+/src/main/java/telegramBot/TelegramBotValues.java

@@ -1,4 +1,4 @@
-package TelegramBot;
+package telegramBot;
 
 import java.util.ArrayList;
 import java.util.List;

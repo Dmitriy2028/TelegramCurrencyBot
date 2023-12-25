@@ -1,9 +1,9 @@
-package PrettyOutput;
+package prettyOutput;
 
-import Enums.BankNames;
-import Enums.BuySell;
-import Rounding.RoundValues;
-import TelegramBot.User;
+import enums.BankNames;
+import enums.BuySell;
+import rounding.RoundValues;
+import telegramBot.User;
 
 import java.util.Map;
 
