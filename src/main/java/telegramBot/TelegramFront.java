@@ -2,8 +2,6 @@ package telegramBot;
 
 import bankUtils.BankUtil;
 import enums.BankNames;
-import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
-import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import prettyOutput.OutputTextCreator;
 import dailyNotifications.NotificationSender;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -18,18 +16,22 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.util.*;
 
 public class TelegramFront extends TelegramLongPollingBot {
-
-
+    public TelegramFront(String telegramBotName, String telegramBotToken){
+        this.telegramBotName=telegramBotName;
+        this.telegramBotToken = telegramBotToken;
+    }
+    private String telegramBotName;
+    private String telegramBotToken;
     private static final Map<Long, User> USERS = new HashMap<>();
 
     @Override
     public String getBotUsername() {
-        return TelegramBotValues.NAME.toString();
+        return telegramBotName;
     }
 
     @Override
     public String getBotToken() {
-        return TelegramBotValues.TOKEN.toString();
+        return telegramBotToken;
     }
 
     private final NotificationSender notificationSender = new NotificationSender(this);

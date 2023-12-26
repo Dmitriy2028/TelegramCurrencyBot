@@ -11,7 +11,7 @@ import java.util.List;
 public class AppLauncher {
     public static void main(String[] args) throws TelegramApiException {
         TelegramBotsApi api = new TelegramBotsApi(DefaultBotSession.class);
-        api.registerBot(new TelegramFront());
+        api.registerBot(new TelegramFront(System.getenv("telegramBotName"),System.getenv("telegramBotToken")));
 
     }
 }
