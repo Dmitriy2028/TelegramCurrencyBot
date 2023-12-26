@@ -19,22 +19,14 @@ public class BankUtilBuilder {
     private static final BankBuilder BUILDER = new BankBuilder();
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
+    // this main is for testing only
+    // not integrated into TelegramCurrencyBot
     public static void main(String[] args) {
         BankUtilBuilder bankUtilBuilder = new BankUtilBuilder();
         bankUtilBuilder.getCource(BankNames.NBU).entrySet().forEach(System.out::println);
         bankUtilBuilder.getCource(BankNames.PRIVAT).entrySet().forEach(System.out::println);
         bankUtilBuilder.getCource(BankNames.MONO).entrySet().forEach(System.out::println);
 
-//        List<CurrenciesAndCodeEnum> listCurrencyEnum = bankNBU.getListCurrencyEnum();
-//        listCurrencyEnum.stream()
-//                        .forEach(currency -> {
-//                            System.out.println(currency.name() + " : " + currency.getCurrencyCode());
-//                        });
-
-//        System.out.println("bank = " + bankNBU);
-
-//        bankUtilBuilder.getCource(BankNames.NBU, new CurrenciesAndCodeEnum[]{CurrenciesAndCodeEnum.USD,CurrenciesAndCodeEnum.EUR} );
-//        System.out.println("CurrenciesAndCode.EUR = " + CurrenciesAndCodeEnum.EUR + " cc: " + CurrenciesAndCodeEnum.EUR.getCurrencyCode() );
     }
 
     public Map<String, Double> getCource(BankNames bankName) {
